@@ -29,24 +29,24 @@ public class PFAColaborator extends Colaborator{
         impozit = 0.1 * venit_net;
 
 
-        if(venit_net < 6 * salariuMinimBrutLunar){
-            CASS =  6 * salariuMinimBrutLunar    * 0.1;
+        if(venit_net < 6 * salariuMinimBrutAnual){
+            CASS =  6 * salariuMinimBrutAnual    * 0.1;
         }
-        else if (venit_net >= 6 * salariuMinimBrutLunar && venit_net <= 72 * salariuMinimBrutLunar) {
+        else if (venit_net >= 6 * salariuMinimBrutAnual && venit_net <= 72 * salariuMinimBrutAnual) {
             CASS = venit_net * 0.1;
         }
-        else if (venit_net > 72 * salariuMinimBrutLunar){
-            CASS = 72 * salariuMinimBrutLunar * 0.1;
+        else if (venit_net > 72 * salariuMinimBrutAnual){
+            CASS = 72 * salariuMinimBrutAnual * 0.1;
         }
 
-        if(venit_net < 12 * salariuMinimBrutLunar){
+        if(venit_net < 12 * salariuMinimBrutAnual){
             CAS = 0.0;
         }
-        else if (venit_net >= 12 * salariuMinimBrutLunar && venit_net <= 24 * salariuMinimBrutLunar) {
-            CAS =  12 * salariuMinimBrutLunar * 0.25 ;
+        else if (venit_net >= 12 * salariuMinimBrutAnual && venit_net <= 24 * salariuMinimBrutAnual) {
+            CAS =  12 * salariuMinimBrutAnual * 0.25 ;
         }
-        else if(venit_net > 24 * salariuMinimBrutLunar) {
-            CAS = 24 * salariuMinimBrutLunar * 0.25;
+        else if(venit_net > 24 * salariuMinimBrutAnual) {
+            CAS = 24 * salariuMinimBrutAnual * 0.25;
         }
 
         return (venit_net - impozit - CAS - CASS);

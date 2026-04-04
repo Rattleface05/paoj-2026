@@ -70,12 +70,19 @@ public class Main {
         }
         if (CIMNumar > 0)
             System.out.println("CIM: suma = " + String.format( "%.2f", CIMSuma) + " lei, număr = " + CIMNumar);
+        else
+            System.out.println("CIM: suma = nu lei, număr = null");
+
         if (PFANumar > 0)
 
             System.out.println("PFA: suma = " + String.format( "%.2f", PFASuma) + " lei, număr = " + PFANumar);
+        else
+            System.out.println("PFA: suma = nu lei, număr = null");
         if (SRLNumar > 0)
 
             System.out.println("SRL: suma = " + String.format( "%.2f", SRLSuma) + " lei, număr = " + SRLNumar);
+        else
+            System.out.println("SRL: suma = nu lei, număr = null");
     }
 
     public static void main(String[] args) {

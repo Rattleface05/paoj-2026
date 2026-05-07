@@ -1,4 +1,4 @@
-# Exercițiul 1 — Serializarea istoricului de tranzacții bancare
+  # Exercițiul 1 — Serializarea istoricului de tranzacții bancare
 
 > **Pachet:** `com.pao.laboratory09.exercise1`
 > **Timp estimat:** ~45 min · **Teste automate:** da (`Checker.java`, 3 părți)

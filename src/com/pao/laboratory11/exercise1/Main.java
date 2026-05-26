@@ -12,9 +12,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class Main {
-    private static final Set<String> HIGH_RISK_COUNTRIES =
+
+
+    public static final Set<String> HIGH_RISK_COUNTRIES =
             new HashSet<>(Arrays.asList("RU", "NG", "IR", "KP", "SY"));
 
     private static final Map<String, Integer> CHANNEL_SCORE = new HashMap<>();
@@ -29,6 +32,13 @@ public class Main {
 
     private static final Comparator<Transaction> BY_RISK_DESC_THEN_ID_ASC =
             Comparator.comparingInt(Main::riskScore).reversed().thenComparingInt(t -> t.id);
+
+    private static final Set<String> SUSPICIOUS_CHANNELS = 
+            new HashSet<>(Arrays.asList("WEB", "APP", "CRYPTO"));
+    
+    private static Predicate<Transaction> amountOverThreshold = (t) -> t.amount >= 1000;
+    private static Predicate<Transaction> countryInRisk = (t) -> HIGH_RISK_COUNTRIES.contains(t.country);
+    private static Predicate<Transaction> channelSuspicious = (t) -> SUSPICIOUS_CHANNELS.contains(t.channel);
 
     public static void main(String[] args) {
         try {
@@ -169,7 +179,7 @@ public class Main {
             score += 5;
         }
 
-        if (HIGH_RISK_COUNTRIES.contains(tx.country)) {
+        if (countryInRisk.test(tx)) {
             score += 25;
         }
 
@@ -204,5 +214,6 @@ public class Main {
             this.country = country;
             this.channel = channel;
         }
+
     }
 }

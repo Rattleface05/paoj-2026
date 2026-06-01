@@ -6,6 +6,8 @@
 --  (DatabaseConnection.java face asta automat)
 -- ============================================================
 
+PRAGMA foreign_keys = ON;
+
 -- Ordinea DROP conteaza: intai tabelele cu FK, apoi cele referite
 DROP TABLE IF EXISTS loan;
 DROP TABLE IF EXISTS book;
@@ -50,5 +52,7 @@ CREATE TABLE loan (
     return_date TEXT,                          -- NULL = imprumut activ
     FOREIGN KEY (book_id)   REFERENCES book(id),
     FOREIGN KEY (reader_id) REFERENCES reader(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 

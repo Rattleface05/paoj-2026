@@ -3,6 +3,7 @@ package com.pao.project.foodDelivery.model;
 import java.util.Objects;
 
 public abstract class Locatie {
+    protected long id;
     protected String strada;
     protected int numar;
     protected int scara;
@@ -27,6 +28,14 @@ public abstract class Locatie {
         this.numar = numar;
         this.scara = scara;
         this.apartament = apartament;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getStrada() {
@@ -64,7 +73,8 @@ public abstract class Locatie {
     @Override
     public String toString() {
         return "Locatie{" +
-                "strada='" + strada + '\'' +
+                "id=" + id +
+                ", strada='" + strada + '\'' +
                 ", numar=" + numar +
                 ", scara=" + scara +
                 ", apartament=" + apartament +

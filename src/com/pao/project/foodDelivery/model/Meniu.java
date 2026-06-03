@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Meniu {
+    private long id;
     private HashMap<String, Articol> articole;
 
     public Meniu(){
@@ -30,6 +31,14 @@ public class Meniu {
 
     public int getSize(){
         return articole.size();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

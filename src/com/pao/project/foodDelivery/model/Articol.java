@@ -3,10 +3,12 @@ package com.pao.project.foodDelivery.model;
 import java.util.Objects;
 
 public class Articol {
+    private long id;
     private String nume;
     private Double pret;
     private boolean vegan;
 
+    public Articol(){}
     public Articol(String nume, Double pret){
         this.nume = nume;
         this.pret = pret;
@@ -25,6 +27,14 @@ public class Articol {
 
     public Double getPret() {
         return pret;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setPret(Double pret) {
@@ -49,7 +59,7 @@ public class Articol {
 
     @Override
     public String toString(){
-        return "Nume: " + nume + ", Pret: " + pret + " lei, Vegan: " + isVegan();
+        return "Articol{"+ "ID: " + id + ", Nume: " + nume + ", Pret: " + pret + " lei, Vegan: " + isVegan()+"}";
     }
 
     @Override

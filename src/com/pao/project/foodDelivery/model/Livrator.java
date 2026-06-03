@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Livrator {
+    public long id;
     private String nume;
     private ArrayList<Comanda> comenziIndeplinite;
 
@@ -15,13 +16,20 @@ public class Livrator {
     public void addComanda(Comanda comanda){
         comenziIndeplinite.add(comanda);
     }
-
     public double baniObtinuti(){
         double sum = 0;
         for (Comanda comanda : comenziIndeplinite){
             sum += comanda.total();
         }
         return sum;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNume() {
@@ -39,7 +47,8 @@ public class Livrator {
     @Override
     public String toString() {
         return "Livrator{" +
-                "nume='" + nume + '\'' +
+                "id=" + id +
+                ", nume='" + nume + '\'' +
                 ", comenziIndeplinite=" + comenziIndeplinite.size() +
                 ", baniObtinuti=" + baniObtinuti() +
                 '}';

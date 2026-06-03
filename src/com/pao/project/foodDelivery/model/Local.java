@@ -41,7 +41,8 @@ public class Local extends Locatie {
     @Override
     public String toString() {
         return "Local{" +
-                "nume='" + nume + '\'' +
+                "id=" + id +
+                ", nume='" + nume + '\'' +
                 ", strada='" + strada + '\'' +
                 ", numar=" + numar +
                 '}';

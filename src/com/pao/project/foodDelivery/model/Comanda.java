@@ -9,7 +9,7 @@ public class Comanda implements Comparable<Comanda> {
 
     enum Status {TERMINATA, NETERMINATA}
 
-    private int id;
+    private long id;
     private ArrayList<Articol> articolList;
     private Utilizator utilizator;
     private Livrator livrator;
@@ -19,6 +19,7 @@ public class Comanda implements Comparable<Comanda> {
     private Date time;
     private static int nextId = 1;
 
+    public Comanda(){}
     public Comanda(ArrayList<Articol> articolList, Utilizator utilizator, Livrator livrator, Local plecare, Domiciliu destinatie) {
         this.id = nextId++;
         this.articolList = articolList;
@@ -52,8 +53,12 @@ public class Comanda implements Comparable<Comanda> {
         }
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public ArrayList<Articol> getArticolList() {

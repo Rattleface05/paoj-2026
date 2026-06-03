@@ -18,7 +18,8 @@ public class Domiciliu extends Locatie {
     @Override
     public String toString() {
         return "Domiciliu{" +
-                "strada='" + strada + '\'' +
+                "id=" + id +
+                ", strada='" + strada + '\'' +
                 ", numar=" + numar +
                 ", scara=" + scara +
                 ", apartament=" + apartament +

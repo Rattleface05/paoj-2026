@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Utilizator {
+    private long id;
     private String username;
     private String email;
     private int puncte;
     private ArrayList<Comanda> history;
 
-    public Utilizator(String email, String username) {
+    public  Utilizator(){}
+    public  Utilizator(String email, String username) {
         this.email = email;
         this.username = username;
         this.puncte = 0;
@@ -23,6 +25,14 @@ public class Utilizator {
 
     public void addComanda(Comanda comanda){
         history.add(comanda);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -56,7 +66,8 @@ public class Utilizator {
     @Override
     public String toString(){
         return "Utilizator{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", puncte=" + puncte +
                 '}';

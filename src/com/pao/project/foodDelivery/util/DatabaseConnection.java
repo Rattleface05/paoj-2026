@@ -1,7 +1,6 @@
 package com.pao.project.foodDelivery.util;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,19 +9,31 @@ import java.util.Properties;
 public final class DatabaseConnection {
 
     private static DatabaseConnection instance;
-    private Connection connection;
+    private final Connection connection;
 
     // Constructor privat — nimeni din afară nu poate face "new DatabaseConnection()"
     private DatabaseConnection() throws IOException, SQLException {
         Properties props = new Properties();
-        // Citim db.properties din classpath (resources/)
-        try (InputStream is = getClass().getClassLoader()
-                .getResourceAsStream("resources/db.properties")) {
-            if (is == null) {
-                throw new IOException("Nu gasesc db.properties in resources/");
+        
+        // Incearca sa citeasca din classpath (daca resources sunt compilate corect)
+        InputStream isFromClasspath = getClass().getClassLoader().getResourceAsStream("db.properties");
+        
+        // Daca nu gaseste in classpath, incearca din fisierul relativ resources/db.properties
+        final InputStream is;
+        if (isFromClasspath != null) {
+            is = isFromClasspath;
+        } else {
+            try {
+                is = new FileInputStream("resources/db.properties");
+            } catch (FileNotFoundException e) {
+                throw new IOException("Nu gasesc db.properties in classpath sau in resources/db.properties");
             }
+        }
+        
+        try (is) {
             props.load(is);
         }
+        
         String url  = props.getProperty("db.url");
         String user = props.getProperty("db.user");
         String pass = props.getProperty("db.password");

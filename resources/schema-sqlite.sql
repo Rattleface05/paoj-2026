@@ -128,8 +128,16 @@ CREATE TABLE IF NOT EXISTS comanda (
 
     FOREIGN KEY (id_livrator) REFERENCES livrator(id) ON DELETE SET NULL,
     FOREIGN KEY (id_plecare) REFERENCES local(id_locatie),
-    FOREIGN KEY (id_destinatie) REFERENCES domiciliu(id_locatie)
+    FOREIGN KEY (id_destinatie) REFERENCES domiciliu(id_locatie),
     FOREIGN KEY (id_utilizator) REFERENCES utilizator(id) -- Once you create the Utilizator table
+);
+
+CREATE TABLE IF NOT EXISTS comanda_articole (
+    id_comanda INTEGER NOT NULL,
+    id_articol INTEGER NOT NULL,
+    PRIMARY KEY (id_comanda, id_articol),
+    FOREIGN KEY (id_comanda) REFERENCES comanda(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_articol) REFERENCES articol(id) ON DELETE CASCADE
 );
 
 CREATE VIEW IF NOT EXISTS v_record_comanda AS

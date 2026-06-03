@@ -8,6 +8,7 @@ public class Livrator {
     private String nume;
     private ArrayList<Comanda> comenziIndeplinite;
 
+    public Livrator(){}
     public Livrator(String nume) {
         this.nume = nume;
         this.comenziIndeplinite = new ArrayList<>();

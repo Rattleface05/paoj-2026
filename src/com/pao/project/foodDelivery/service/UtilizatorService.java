@@ -8,9 +8,11 @@ import java.util.*;
 public final class UtilizatorService {
     private static UtilizatorService instanta;
     private Map<String, Utilizator> utilizatori; // Map pe email
+    private AuditService auditService;
 
     private UtilizatorService(){
         utilizatori = new HashMap<>();
+        auditService = AuditService.getInstance();
     }
 
     public static UtilizatorService getInstanta(){
@@ -22,6 +24,7 @@ public final class UtilizatorService {
 
     public void addUtilizator(Utilizator utilizator){
         utilizatori.put(utilizator.getEmail(), utilizator);
+        auditService.log("create_utilizator");
     }
 
     public void deleteUtilizator(String email) throws UtilizatorNegasitException {
@@ -29,6 +32,7 @@ public final class UtilizatorService {
             throw new UtilizatorNegasitException("Utilizatorul cu email-ul " + email + " nu a fost gasit!");
         }
         utilizatori.remove(email);
+        auditService.log("delete_utilizator");
     }
 
     public Utilizator getUtilizatorByEmail(String email) throws UtilizatorNegasitException {
@@ -36,12 +40,14 @@ public final class UtilizatorService {
         if(utilizator == null){
             throw new UtilizatorNegasitException("Utilizatorul cu email-ul " + email + " nu a fost gasit!");
         }
+        auditService.log("search_utilizator_by_email");
         return utilizator;
     }
 
     public Utilizator getUtilizatorByUsername(String username) throws UtilizatorNegasitException {
         for(Utilizator u : utilizatori.values()){
             if(u.getUsername().equals(username)){
+                auditService.log("search_utilizator_by_username");
                 return u;
             }
         }
@@ -49,6 +55,7 @@ public final class UtilizatorService {
     }
 
     public List<Utilizator> getAllUtilizatori(){
+        auditService.log("list_all_utilizatori");
         return new ArrayList<>(utilizatori.values());
     }
 
@@ -59,6 +66,7 @@ public final class UtilizatorService {
     public List<Utilizator> getUtilizatoriSortedByPuncte(){
         List<Utilizator> sorted = new ArrayList<>(utilizatori.values());
         sorted.sort((u1, u2) -> Integer.compare(u2.getPuncte(), u1.getPuncte()));
+        auditService.log("sort_utilizatori_by_puncte");
         return sorted;
     }
 
@@ -67,5 +75,12 @@ public final class UtilizatorService {
             throw new UtilizatorNegasitException("Utilizatorul cu email-ul " + email + " nu a fost gasit!");
         }
         utilizatori.put(email, nouUtilizator);
+        auditService.log("update_utilizator");
+    }
+
+    public void addPuncte(String email, int puncte) throws UtilizatorNegasitException {
+        Utilizator u = getUtilizatorByEmail(email);
+        u.addPuncte(puncte);
+        auditService.log("add_puncte");
     }
 }

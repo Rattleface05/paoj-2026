@@ -9,11 +9,13 @@ import java.util.*;
 public final class ComandaService {
     private static ComandaService instanta;
     private PriorityQueue<Comanda> listaComenzi;
-    private Map<Integer, Comanda> comenziPeId;
+    private Map<Long, Comanda> comenziPeId;
+    private AuditService auditService;
 
     private ComandaService(){
         listaComenzi = new PriorityQueue<>();
         comenziPeId = new HashMap<>();
+        auditService = AuditService.getInstance();
     }
 
     public static ComandaService getInstanta(){
@@ -26,6 +28,7 @@ public final class ComandaService {
     public void addComanda(Comanda comanda){
         listaComenzi.add(comanda);
         comenziPeId.put(comanda.getId(), comanda);
+        auditService.log("create_comanda");
     }
 
     public void deleteComanda(int comandaId) throws ComandaNegasitaException {
@@ -34,17 +37,20 @@ public final class ComandaService {
             throw new ComandaNegasitaException("Comanda cu id-ul " + comandaId + " nu a fost gasita!");
         }
         listaComenzi.remove(comanda);
+        auditService.log("delete_comanda");
     }
 
-    public Comanda getComandaById(int id) throws ComandaNegasitaException {
+    public Comanda getComandaById(long id) throws ComandaNegasitaException {
         Comanda comanda = comenziPeId.get(id);
         if(comanda == null){
             throw new ComandaNegasitaException("Comanda cu id-ul " + id + " nu a fost gasita!");
         }
+        auditService.log("search_comanda");
         return comanda;
     }
 
     public List<Comanda> getAllComenzi(){
+        auditService.log("list_all_comenzi");
         return new ArrayList<>(comenziPeId.values());
     }
 
@@ -55,6 +61,12 @@ public final class ComandaService {
     public List<Comanda> getComenziSorted(){
         List<Comanda> sorted = new ArrayList<>(comenziPeId.values());
         Collections.sort(sorted);
+        auditService.log("sort_comenzi");
         return sorted;
+    }
+
+    public void finishComanda(Comanda comanda) {
+        comanda.finishComanda();
+        auditService.log("finish_comanda");
     }
 }

@@ -7,7 +7,15 @@ import java.util.Objects;
 
 public class Comanda implements Comparable<Comanda> {
 
-    enum Status {TERMINATA, NETERMINATA}
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public enum Status {TERMINATA, NETERMINATA}
 
     private long id;
     private ArrayList<Articol> articolList;
